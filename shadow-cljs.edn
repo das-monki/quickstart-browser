@@ -4,8 +4,9 @@
   "src/main"
   "src/test"]
 
- :dependencies
- []
+ :deps true
+
+ :npm-deps {:install false}
 
  :dev-http
  {8020 "public"}
