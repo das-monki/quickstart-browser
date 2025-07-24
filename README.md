@@ -23,9 +23,9 @@ npm install
 npx shadow-cljs server
 ```
 
-This runs the `shadow-cljs` server process which all following commands will talk to. Just leave it running and open a new terminal to continue.
+This runs the `shadow-cljs` server process which all following commands will talk to. Leave it running and open a new terminal to continue.
 
-The first startup takes a bit of time since it has to download all the dependencies and do some prep work. Once this is running we can get started.
+The first startup takes a bit of time since it has to download all the dependencies and do some prep work. Once this is running, we can get started.
 
 ```txt
 npx shadow-cljs watch app
@@ -55,7 +55,7 @@ The app is only a very basic skeleton with the most useful development tools con
  :dependencies ; covered later
  [] 
 
- :dev-http ; starts a http dev server on http://localhost:8020 and serves `public`
+ :dev-http ; starts an http dev server on http://localhost:8020 and serves `public`
  {8020 "public"}
 
  :builds
@@ -67,12 +67,11 @@ The app is only a very basic skeleton with the most useful development tools con
    :modules
    {:main ; becomes public/js/main.js
     {:init-fn starter.browser/init}}}}}
-
 ```
 
-It defines the `:app` build with the `:target` set to `:browser`. All output will be written to `public/js` which is a path relative to the project root (ie. the directory the `shadow-cljs.edn` config is in).
+It defines the `:app` build with the `:target` set to `:browser`. All output will be written to `public/js` which is a path relative to the project root (i.e., the directory the `shadow-cljs.edn` config is in).
 
-`:modules` defines the how the output should be bundled together. For now we just want one file. The `:main` module will be written to `public/js/main.js`, it will include the code from the `:entries` and all their dependencies.
+`:modules` defines how the output should be bundled together. For now, we just want one file. The `:main` module will be written to `public/js/main.js`, it will include the code from the `:entries` and all their dependencies.
 
 The last part is the actual `index.html` that is loaded when you open `http://localhost:8020`. It loads the generated `/js/main.js` and then calls `start.browser.init` which we defined in the `src/main/start/browser.cljs`.
 
@@ -97,11 +96,11 @@ The last part is the actual `index.html` that is loaded when you open `http://lo
 
 ## Live reload
 
-To see the live reload in action you can edit the `src/main/start/browser.cljs`. Some output will be printed in the browser console.
+To see the live reload in action, you can edit the `src/main/start/browser.cljs`. Some output will be printed in the browser console.
 
 ## REPL
 
-During development it the REPL is very useful.
+During development, the REPL is very useful.
 
 From the command line use `npx shadow-cljs cljs-repl app`.
 
@@ -117,7 +116,7 @@ You can exit the REPL by either `CTRL+C` or typing `:repl/quit`.
 
 ## Release
 
-The `watch` process we started is all about development. It injects the code required for the REPL and the all other devtools but we do not want any of that when putting the code into "production" (ie. making it available publicly).
+The `watch` process we started is all about development. It injects the code required for the REPL and the all other devtools, but we do not want any of that when putting the code into "production" (i.e., making it available publicly).
 
 The `release` action will remove all development code and run the code through the Closure Compiler to produce a minified `main.js` file. Since that will overwrite the file created by the `watch` we first need to stop that.
 
@@ -125,4 +124,4 @@ Use `CTRL+C` to stop the `watch` process and instead run `npx shadow-cljs releas
 
 When done you can open `http://localhost:8020` and see the `release` build in action. At this point you would usually copy the `public` directory to the "production" web server.
 
-Note that in the default config we overwrote the `public/js/main.js` created by the `watch`. You can also configure a different path to use for release builds but writing the output to the same file means we do not have to change the `index.html` and test everything as is.
+Note that in the default config we overwrote the `public/js/main.js` created by the `watch`. You can also configure a different path to use for release builds, but writing the output to the same file means we do not have to change the `index.html` and test everything as is.
